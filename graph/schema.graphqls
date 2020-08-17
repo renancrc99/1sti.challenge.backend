@@ -1,0 +1,36 @@
+type Tarefa {
+  id: ID!
+  text: String!
+  feito: Boolean!
+  status: String!
+  usuario: Usuario!
+}
+
+type Usuario {
+  id: ID!
+  nome: String!
+  email: String!
+}
+input UsuarioInput {
+  id: ID!
+  nome: String!
+  email: String!
+}
+input TarefaInput {
+  id: ID!
+  text: String!
+  feito: Boolean!
+  status: String!
+  usuarioInput: UsuarioInput!
+}
+
+type Query {
+  listarTarefasUsuario(input : UsuarioInput!): [Tarefa]!
+}
+
+type Mutation {
+  criarUsuario(input : UsuarioInput): Usuario
+  criarTarefaPorUsuario(input: TarefaInput!): Tarefa!
+  editarTarefaPorUsuario(input: TarefaInput!): Tarefa!
+  mudarStatusTarefa(input: TarefaInput!): Tarefa!
+}
