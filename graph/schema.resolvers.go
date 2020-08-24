@@ -5,30 +5,45 @@ package graph
 
 import (
 	"context"
-	"fmt"
 
+	Controllers "github.com/renancrc99/1sti.challenge.backend/controllers"
 	"github.com/renancrc99/1sti.challenge.backend/graph/generated"
 	"github.com/renancrc99/1sti.challenge.backend/graph/model"
 )
 
 func (r *mutationResolver) CriarUsuario(ctx context.Context, input *model.UsuarioInput) (*model.Usuario, error) {
-	panic(fmt.Errorf("not implemented"))
+	err := Controllers.CriarUsuario(input)
+	return nil, err
 }
 
 func (r *mutationResolver) CriarTarefaPorUsuario(ctx context.Context, input model.TarefaInput) (*model.Tarefa, error) {
-	panic(fmt.Errorf("not implemented"))
+	err := Controllers.CriarTarefaPorUsuario(input)
+	return nil, err
 }
 
 func (r *mutationResolver) EditarTarefaPorUsuario(ctx context.Context, input model.TarefaInput) (*model.Tarefa, error) {
-	panic(fmt.Errorf("not implemented"))
+	err := Controllers.EditarTarefaPorUsuario(input)
+	return nil, err
 }
 
 func (r *mutationResolver) MudarStatusTarefa(ctx context.Context, input model.TarefaInput) (*model.Tarefa, error) {
-	panic(fmt.Errorf("not implemented"))
+	err := Controllers.MudarStatusTarefa(input)
+	return nil, err
 }
 
 func (r *queryResolver) ListarTarefasUsuario(ctx context.Context, input model.UsuarioInput) ([]*model.Tarefa, error) {
-	panic(fmt.Errorf("not implemented"))
+	tarefas := Controllers.ListarTarefasUsuario(input)
+	var retorno []*model.Tarefa
+	for i := 0; i < len(tarefas); i++ {
+		var nova = new(model.Tarefa)
+		nova.ID = tarefas[i].ID
+		nova.Feito = tarefas[i].Feito
+		nova.Text = tarefas[i].Text
+		nova.Status = tarefas[i].Status
+		retorno = append(retorno, nova)
+
+	}
+	return retorno, nil
 }
 
 // Mutation returns generated.MutationResolver implementation.
