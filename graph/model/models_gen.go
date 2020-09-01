@@ -3,7 +3,7 @@
 package model
 
 type Tarefa struct {
-	ID      string   `json:"id"`
+	ID      int      `json:"id"`
 	Text    string   `json:"text"`
 	Feito   bool     `json:"feito"`
 	Status  string   `json:"status"`
@@ -11,7 +11,7 @@ type Tarefa struct {
 }
 
 type TarefaInput struct {
-	ID           string        `json:"id"`
+	ID           int           `json:"id"`
 	Text         string        `json:"text"`
 	Feito        bool          `json:"feito"`
 	Status       string        `json:"status"`
@@ -19,13 +19,13 @@ type TarefaInput struct {
 }
 
 type Usuario struct {
-	ID    string `json:"id"`
+	ID    int    `json:"id"`
 	Nome  string `json:"nome"`
 	Email string `json:"email"`
 }
 
 type UsuarioInput struct {
-	ID    string `json:"id"`
+	ID    int    `json:"id"`
 	Nome  string `json:"nome"`
 	Email string `json:"email"`
 }
