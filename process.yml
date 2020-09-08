@@ -1,0 +1,16 @@
+version: 2
+jobs:
+  build:
+    docker:
+    - image: circleci/golang:1.15
+    parallelism: 2
+    steps:
+    - checkout
+    - run: go build -x; ls -lah
+    environment:
+    - CIRCLE_COMPARE_URL: https://github.com/renancrc99/1sti.challenge.backend/compare/2af22c4777e29a75637a61074f3650af51881b2a...2af22c4777e29a75637a61074f3650af51881b2a
+workflows:
+  version: 2
+  build-workflow:
+    jobs:
+    - build

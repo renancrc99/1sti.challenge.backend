@@ -274,12 +274,8 @@ func (ec *executionContext) introspectType(name string) (*introspection.Type, er
 }
 
 var sources = []*ast.Source{
-	&ast.Source{Name: "graph/schema.graphqls", Input: `# GraphQL schema example
-#
-# https://gqlgen.com/getting-started/
-
-type Tarefa {
-  id: ID!
+	&ast.Source{Name: "graph/schema.graphqls", Input: `type Tarefa {
+  id: Int!
   text: String!
   feito: Boolean!
   status: String!
@@ -287,17 +283,17 @@ type Tarefa {
 }
 
 type Usuario {
-  id: ID!
+  id: Int!
   nome: String!
   email: String!
 }
 input UsuarioInput {
-  id: ID!
+  id: Int!
   nome: String!
   email: String!
 }
 input TarefaInput {
-  id: ID!
+  id: Int!
   text: String!
   feito: Boolean!
   status: String!
@@ -741,9 +737,9 @@ func (ec *executionContext) _Tarefa_id(ctx context.Context, field graphql.Collec
 		}
 		return graphql.Null
 	}
-	res := resTmp.(string)
+	res := resTmp.(int)
 	fc.Result = res
-	return ec.marshalNID2string(ctx, field.Selections, res)
+	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Tarefa_text(ctx context.Context, field graphql.CollectedField, obj *model.Tarefa) (ret graphql.Marshaler) {
@@ -911,9 +907,9 @@ func (ec *executionContext) _Usuario_id(ctx context.Context, field graphql.Colle
 		}
 		return graphql.Null
 	}
-	res := resTmp.(string)
+	res := resTmp.(int)
 	fc.Result = res
-	return ec.marshalNID2string(ctx, field.Selections, res)
+	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Usuario_nome(ctx context.Context, field graphql.CollectedField, obj *model.Usuario) (ret graphql.Marshaler) {
@@ -2047,7 +2043,7 @@ func (ec *executionContext) unmarshalInputTarefaInput(ctx context.Context, obj i
 		switch k {
 		case "id":
 			var err error
-			it.ID, err = ec.unmarshalNID2string(ctx, v)
+			it.ID, err = ec.unmarshalNInt2int(ctx, v)
 			if err != nil {
 				return it, err
 			}
@@ -2089,7 +2085,7 @@ func (ec *executionContext) unmarshalInputUsuarioInput(ctx context.Context, obj 
 		switch k {
 		case "id":
 			var err error
-			it.ID, err = ec.unmarshalNID2string(ctx, v)
+			it.ID, err = ec.unmarshalNInt2int(ctx, v)
 			if err != nil {
 				return it, err
 			}
@@ -2549,12 +2545,12 @@ func (ec *executionContext) marshalNBoolean2bool(ctx context.Context, sel ast.Se
 	return res
 }
 
-func (ec *executionContext) unmarshalNID2string(ctx context.Context, v interface{}) (string, error) {
-	return graphql.UnmarshalID(v)
+func (ec *executionContext) unmarshalNInt2int(ctx context.Context, v interface{}) (int, error) {
+	return graphql.UnmarshalInt(v)
 }
 
-func (ec *executionContext) marshalNID2string(ctx context.Context, sel ast.SelectionSet, v string) graphql.Marshaler {
-	res := graphql.MarshalID(v)
+func (ec *executionContext) marshalNInt2int(ctx context.Context, sel ast.SelectionSet, v int) graphql.Marshaler {
+	res := graphql.MarshalInt(v)
 	if res == graphql.Null {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")

@@ -1,5 +1,5 @@
 type Tarefa {
-  id: ID!
+  id: Int!
   text: String!
   feito: Boolean!
   status: String!
@@ -7,17 +7,17 @@ type Tarefa {
 }
 
 type Usuario {
-  id: ID!
+  id: Int!
   nome: String!
   email: String!
 }
 input UsuarioInput {
-  id: ID!
+  id: Int!
   nome: String!
   email: String!
 }
 input TarefaInput {
-  id: ID!
+  id: Int!
   text: String!
   feito: Boolean!
   status: String!
